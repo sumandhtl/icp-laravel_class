@@ -25,6 +25,6 @@ use App\Http\Controllers\HomeController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'aboutIndex'])->name('about');
 
-Route::post('/student/store', [HomeController::class, 'saveStudentData'])->name('student.store');
+Route::post('/student/save', [HomeController::class, 'saveStudentData'])->name('student.store');
 
 

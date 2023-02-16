@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\GenderModel;
 
-
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\Validator;
+
+use Illuminate\Support\Facades\DB;
+
 
 class HomeController extends Controller
 {
@@ -21,19 +26,18 @@ class HomeController extends Controller
     }
 
     function saveStudentData(Request $request){
+
         $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'message' => 'required',
-            'phone' => 'required|max:10',
-            'g-recaptcha-response' => 'required'
+            'full_name' => 'required',
+            'gender' => 'required',
         ]);
 
-        DB::table('contact')->insert([
-            'name' => $request->get('name'),
-            'phone' => $request->get('phone'),
-            'email'  => $request->get('email'),
-            'message'   => $request->get('message')
+        DB::table('student_data')->insert([
+            'full_name' => $request->get('full_name'),
+            'gender_id' => $request->get('gender'),
+            'created_date' => date('Y-m-d H:i:s'),
+            'created_by' => 1,
+            'is_active' => 1,
         ]);
 
         return back()->with('success','Thank you for your query. We will contact you soon via mail or call');

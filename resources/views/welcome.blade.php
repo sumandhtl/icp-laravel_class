@@ -9,20 +9,21 @@
 
     <a href="{{ route('about') }}">Got to about page</a>
 
-    <form method="get">
+    <form method="post" action="{{ route('student.store') }}">
+        {{ csrf_field() }}
 
         <label>Full Name:</label>
         <input type="text" placeholder="Full Name" name="full_name" required>
 
-        <input type="submit" value="Submit">
 
         <label>Gender</label>
-        <select>
+        <select name="gender">
             <?php foreach ($data as $key => $value): ?>
-                <option>{{ $value->name }}</option>
+                <option value="{{ $value->id }}">{{ $value->name }}</option>
             <?php endforeach ?>
         </select>
 
+        <input type="submit" value="Submit">
         
     </form>
 
